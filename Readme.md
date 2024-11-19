@@ -109,12 +109,48 @@ sudo nano /etc/apache2/sites-available/000-default.conf
 sudo systemctl restart apache2
 ```
 
-## Configuración DNS
-
-INSTALAR NO-IP y configurar un dominio
-
 ## Configuracion de certificado SSL
+### Pasos previos
+> si estas en WSL <br>
+Deberas redireccionar el puerto 443 de tu maquina windows a la maquina WSL
+```bash
+netsh interface portproxy add v4tov4 listenport=443 listenaddress=0.0.0.0 connectport=443 connectaddress=172.24.12.198
+```
 
+Permite el redireccionamiento del puerto 443 desde tu router a la maquina windows.
+Para ello acceder a la ip de tu Gateway por ejemplo `http://192.168.0.1`
+
+### ¡Empecemos!
+Instalamos cerbot
+```bash
+sudo apt install certbot python3-certbot-apache
+```
+```bash
+sudo certbot --apache
+```
+
+Sigue las intrucciones que aparecen en la consola. te apareceran las siguientes instrucciones:
+1. introduce el correo electronico que usaras para registrarte
+2. acepta los terminos de servicio
+3. acepta compartir tu correo electronico con el servicio
+4. Introduce el dns por ejemplo `luishidalgoa.ddns.net`
+
+una vez completados los pasos anteriores, deberiamos tener un certificado SSL en nuestro dominio. para ello desde el navegador accedemos a `https://luishidalgoa.ddns.net`
+
+## Configuracion DNS (OPCIONAL) con No-IP
+```
+
+
+
+
+
+
+
+
+
+
+
+```
 
 ## Arranque de inicio de la maquina WSL
 1. **Escribimos en un bloc de notas el siguiente comando**
